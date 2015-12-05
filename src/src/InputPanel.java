@@ -36,21 +36,53 @@ public class InputPanel  extends JPanel{
     static final int angle_MAX = 89;
     static final int angle_INIT = 30;
     
+    static final int point_MIN = 1;
+    static final int point_MAX = 10;
+    static final int point_INIT = 7;
+    
+    
+    
+    
     JTextArea myTextArea = null;
    
     
     JSlider sliderVelocity = null;
     JSlider sliderAngle = null;
-    String[] labels = {"Velocity: ","Angle"};
+    JSlider sliderPoint = null;
+    String[] labels = {"Velocity: ","Angle :","Points :"};
     
     Horizont other = null;
 
     public InputPanel(Horizont other) {
         
         this.other = other;
-        
        
-        this.setBackground(Color.gray);
+        JLabel labelPoints = new JLabel(labels[2],JLabel.TRAILING);
+        this.add(labelPoints);
+        
+        sliderPoint = new JSlider(JSlider.HORIZONTAL, point_MIN,point_MAX,point_INIT);   
+        sliderPoint.setMinorTickSpacing(1);
+        sliderPoint.setPaintLabels(true);
+        
+        this.add(sliderPoint);
+        
+        JTextField pointTextField = new JTextField(3);
+        this.add(pointTextField);
+        
+        sliderPoint.addChangeListener(new ChangeListener() {
+
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                
+                Object source = e.getSource();
+                JSlider theSlider = (JSlider) source;
+                
+                pointTextField.setText(String.valueOf(theSlider.getValue()));
+            }
+        });
+        
+                
+        
         
         JLabel labelVelocity = new JLabel(labels[0],JLabel.TRAILING);
         this.add(labelVelocity);
@@ -82,7 +114,7 @@ public class InputPanel  extends JPanel{
        
        
        
-       sliderAngle = new JSlider(JSlider.HORIZONTAL, angle_MIN,angle_MAX,angle_INIT);   
+        sliderAngle = new JSlider(JSlider.HORIZONTAL, angle_MIN,angle_MAX,angle_INIT);   
         sliderAngle.setMinorTickSpacing(1);
         sliderAngle.setPaintLabels(true);
         
@@ -115,17 +147,18 @@ public class InputPanel  extends JPanel{
                 
                 System.out.println("SliderVelocity is: "+sliderVelocity.getValue());
                 System.out.println("SliderAngle is : "+sliderAngle.getValue());
+                System.out.println("Number of points is: "+sliderPoint.getValue());
                 
              
                 
-              other.sendData(sliderVelocity.getValue(),sliderAngle.getValue());
+              other.sendData(sliderVelocity.getValue(),sliderAngle.getValue(),sliderPoint.getValue());
             }
        
        });
        
        add(b);
        
-            myTextArea = new JTextArea(90, 60);
+            myTextArea = new JTextArea(80, 50);
             
             add(myTextArea);
             

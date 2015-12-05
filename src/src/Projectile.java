@@ -19,7 +19,7 @@ public class Projectile {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+      
         int fWIDT = 1024;
         int fHEIGHT = 680;
         
@@ -27,26 +27,22 @@ public class Projectile {
         frame.setSize(fWIDT, fHEIGHT);
         
         frame.setLocation(400, 400);
-        frame.setTitle("Projectile of a ball");
+        frame.setTitle("Projectile of a ball - Stefan Bolcs");
         
         GridLayout layout = new GridLayout(2,1);
         frame.setLayout(layout);
+        frame.setResizable(false);
         
          
-        
         Horizont horizont = new Horizont(fWIDT, fHEIGHT);
         
         horizont.setPreferredSize(new Dimension(640,480));
         horizont.setBackground(Color.white);
         frame.add(horizont);
         
-     
-        
-       JPanel panel2 = new InputPanel(horizont);
-        
-        panel2.setPreferredSize(new Dimension(320,480));
-        
-        panel2.setBackground(Color.gray);
+       JPanel panel2 = new InputPanel(horizont);        
+        panel2.setPreferredSize(new Dimension(320,480));        
+        panel2.setBackground(new Color(242, 242, 242));
         
         frame.add(panel2);
         
